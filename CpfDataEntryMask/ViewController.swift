@@ -25,17 +25,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: - UI Actions
     @IBAction func goAction(_ sender: Any) {
         if (cpf.text?.isValidCpf())! {
-            print("CPF OK")
+            view.alert(msg: "👍 CPF OK !", sender: self)
         }else{
-            print("CPF NOT OK")
+            view.alert(msg: "❌ CPF não válido!", sender: self)
         }
     }
     
     // MARK: - Text Field Delegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        print("👉 range index: \(range.location)  👉 range direction: \(range.length)  👉 replacement string: \(string)  👉 textField: \(textField.text!)")
-        
         var updatedText = textField.text!
         if (range.location == 3 || range.location == 7 || range.location == 11) && range.length == 0 {
             if range.location < 11 {
@@ -45,9 +42,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-        print("💢👉 updatedText: \(updatedText)")
         updateTextField(updatedText)
-        
         if range.location < 14 {
             return true
         }else{
